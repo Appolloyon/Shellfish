@@ -1,6 +1,6 @@
 #! /bin/bash
 # Author: Jed Barlow
-# Updates by: Christen KLinger
+# Updates by: Christen Klinger
 # Last Modified: November 9, 2014
 # PBS -l nodes=1,walltime=120:00:00
 
@@ -34,9 +34,9 @@ for file in $DATAFILE; do
         q_short_name=$(basename "$query")
         q_short_name="${q_short_name%.*}"
 
-		mkdir -p /home/cklinger/"HMMer_$db_short_name"
+		mkdir -p /home/cklinger/"HMMer_$q_short_name"
 		
-		hmmsearch -o "HMMer_$db_short_name/${q_short_name}_${db_short_name}_${now}.outfile.txt" "$query" "$file"
+		hmmsearch -E 0.5 --tblout "HMMer_$q_short_name/${q_short_name}_${db_short_name}_${now}.outfile.txt" "$query" "$file"
 	done
 done
 
