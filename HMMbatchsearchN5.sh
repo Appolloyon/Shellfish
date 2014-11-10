@@ -2,6 +2,7 @@
 # Author: Jed Barlow
 # Updates by: Christen Klinger
 # Last Modified: November 10, 2014
+# PBS -l nodes=1,walltime=120:00:00
 
 # Prepend for output filenames
 OUTPUTFILE='output'
