@@ -35,7 +35,7 @@ for file in $DATAFILE; do
 
 		mkdir -p /home/cklinger/"HMMer_$db_short_name"
 		
-		hmmsearch --max -o "HMMer_$db_short_name/${q_short_name}_${db_short_name}_${now}.outfile.txt" "$query" "$file"
+		hmmsearch --tblout -o "HMMer_$db_short_name/${q_short_name}_${db_short_name}_${now}.outfile.txt" "$query" "$file"
 	done
 done
 
