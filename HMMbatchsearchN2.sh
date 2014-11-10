@@ -33,7 +33,7 @@ for file in $DATAFILE; do
         q_short_name=$(basename "$query")
         q_short_name="${q_short_name%.*}"
 
-		mkdir -p /home/cklinger/"HMMER_$q_short_name"
+		mkdir -p /home/cklinger/"HMMer_$q_short_name"
 		
 		hmmsearch -o "HMMer_$q_short_name/${q_short_name}_${db_short_name}_${now}.outfile.txt" "$query" "$file"
 	done

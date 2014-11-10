@@ -1,11 +1,13 @@
 #! /bin/bash
 # Author: Jed Barlow
-# Last Modified: May 31, 2012
+# Updates by: Christen KLinger
+# Last Modified: November 9, 2014
 
 # Prepend for output filenames
 OUTPUTFILE='output'
-FASTADIR=/home/bioinfor1/cklinger/batch_search_database
-QUERYDIR=/home/bioinfor1/cklinger/batch_search_queries
+FASTADIR=/home/cklinger/batch_search_database
+QUERYDIR=/home/cklinger/batch_search_queries
+now=$(date +"%Y%m%d")
 
 date
 echo $HOSTNAME
@@ -31,9 +33,9 @@ for file in $DATAFILE; do
         q_short_name=$(basename "$query")
         q_short_name="${q_short_name%.*}"
 
-		mkdir -p /home/bioinfor1/cklinger/"HMMer_$db_short_name"
+		mkdir -p /home/cklinger/"HMMer_$db_short_name"
 		
-		hmmsearch -o "HMMer_$db_short_name/${q_short_name}_${db_short_name}.outfile.txt" "$query" "$file"
+		hmmsearch -o "HMMer_$db_short_name/${q_short_name}_${db_short_name}_${now}.outfile.txt" "$query" "$file"
 	done
 done
 

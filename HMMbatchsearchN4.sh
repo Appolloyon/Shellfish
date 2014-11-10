@@ -1,11 +1,14 @@
 #! /bin/bash
 # Author: Jed Barlow
-# Last Modified: May 31, 2012
+# Updates by: Christen Klinger
+# Last Modified: November 9, 2014
 # PBS -l nodes=1,walltime=120:00:00
+
 # Prepend for output filenames
 OUTPUTFILE='output'
 FASTADIR=/home/cklinger/batch_search_database
 QUERYDIR=/home/cklinger/batch_search_queries
+now=$(date +"%Y%m%d")
 
 date
 echo $HOSTNAME
@@ -31,9 +34,9 @@ for file in $DATAFILE; do
         q_short_name=$(basename "$query")
         q_short_name="${q_short_name%.*}"
 
-		mkdir -p /home/cklinger/"HMMER_$q_short_name"
+		mkdir -p /home/cklinger/"HMMer_$q_short_name"
 		
-		hmmsearch --tblout "HMMER_$q_short_name/${q_short_name}_${db_short_name}.outfile.txt" "$query" "$file"
+		hmmsearch --tblout "HMMer_$q_short_name/${q_short_name}_${db_short_name}_${now}.outfile.txt" "$query" "$file"
 	done
 done
 
