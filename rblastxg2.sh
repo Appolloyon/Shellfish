@@ -13,7 +13,8 @@
 # Concerning the remainder of this file,
 # Author: Jed Barlow
 # Author: Lael Barlow
-# Last Modified: July 25, 2012
+# Updates by: Christen Klinger
+# Last Modified: November 10, 2014
 
 
 # Info helpful for debugging
@@ -23,7 +24,7 @@ date
 
 QUERY_SUB_DIR=/home/cklinger/BLAST_SEARCHES/rblastxqueries
 DATABASE_SUB_DIR=/home/cklinger/BLAST_SEARCHES/rblastxdatabase
-BLAST_OPTIONS="-word_size 3 -gapopen 11 -gapextend 1"
+BLAST_OPTIONS="-word_size 3 -gapopen 11 -gapextend 1 -evalue 0.1"
 
 # Automatically find query files to use
 QUERYFILES=`ls $QUERY_SUB_DIR/*.fa`
@@ -47,11 +48,11 @@ for database in $DATAFILES; do
         q_short_name=$(basename "$query")
         q_short_name="${q_short_name%.*}"
         
-        mkdir -p /home/cklinger/"rblastx_$q_short_name"
+        mkdir -p /home/cklinger/"rblastx_$db_short_name"
        
         
         ##send BLAST command to Cluster nodes
-        blastx -query "$query" -db "$database" -out "rblastx_$q_short_name/${q_short_name}_${db_short_name}.outfile.txt" $BLAST_OPTIONS
+        blastx -query "$query" -db "$database" -out "rblastx_$db_short_name/${q_short_name}_${db_short_name}_${now}.outfile.txt" $BLAST_OPTIONS
     done
 done
 
