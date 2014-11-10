@@ -13,7 +13,8 @@
 # Concerning the remainder of this file,
 # Author: Jed Barlow
 # Author: Lael Barlow
-# Last Modified: July 25, 2012
+# Updates by: Christen Klinger
+# Last Modified: November 10, 2014
 
 
 # Info helpful for debugging
@@ -23,7 +24,8 @@ date
 
 QUERY_SUB_DIR=/home/cklinger/BLAST_SEARCHES/tblastnqueries
 DATABASE_SUB_DIR=/home/cklinger/BLAST_SEARCHES/tblastndatabase
-BLAST_OPTIONS="-word_size 3 -gapopen 11 -gapextend 1"
+BLAST_OPTIONS="-word_size 3 -gapopen 11 -gapextend 1 -evalue 0.1"
+now=$(date +"%Y%M%d")
 
 # Automatically find query files to use
 QUERYFILES=`ls $QUERY_SUB_DIR/*.fa`
@@ -42,14 +44,14 @@ for database in $DATAFILES; do
     db_short_name=$(basename "$database")
     db_short_name="${db_short_name%.*}"
 
-    mkdir -p /home/cklinger/"tblastn_$db_short_name"
+    mkdir -p /home/cklinger/"tblastn_$q_short_name"
 
     for query in $QUERYFILES; do
         q_short_name=$(basename "$query")
         q_short_name="${q_short_name%.*}"
 
         ##send BLAST command to Cluster nodes
-        tblastn -query "$query" -db "$database" -out "tblastn_$db_short_name/${q_short_name}_${db_short_name}.outfile.txt" -outfmt "6 qseqid sseqid evalue" $BLAST_OPTIONS
+        tblastn -query "$query" -db "$database" -out "tblastn_$q_short_name/${q_short_name}_${db_short_name}_${now}.outfile.txt" -outfmt "6 qseqid sseqid evalue" $BLAST_OPTIONS
     done
 done
 

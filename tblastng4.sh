@@ -14,7 +14,6 @@
 # Author: Jed Barlow
 # Author: Lael Barlow
 # Updates by: Christen Klinger
-# Created: July 25, 2012
 # Last Modified: November 10, 2014
 
 
@@ -45,14 +44,14 @@ for database in $DATAFILES; do
     db_short_name=$(basename "$database")
     db_short_name="${db_short_name%.*}"
 
-    mkdir -p /home/cklinger/"tblastn_$q_short_name"
+    mkdir -p /home/cklinger/"tblastn_$db_short_name"
 
     for query in $QUERYFILES; do
         q_short_name=$(basename "$query")
         q_short_name="${q_short_name%.*}"
 
         ##send BLAST command to Cluster nodes
-        tblastn -query "$query" -db "$database" -out "tblastn_$q_short_name/${q_short_name}_${db_short_name}_${now}.outfile.txt" $BLAST_OPTIONS
+        tblastn -query "$query" -db "$database" -out "tblastn_$db_short_name/${q_short_name}_${db_short_name}_${now}.outfile.txt" -outfmt "6 qseqid sseqid evalue" $BLAST_OPTIONS
     done
 done
 
