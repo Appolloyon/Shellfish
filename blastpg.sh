@@ -14,6 +14,7 @@
 # Author: Jed Barlow
 # Author: Lael Barlow
 # Updates by: Christen Klinger
+# Created: November 10, 2014
 # Last Modified: November 10, 2014
 
 
@@ -48,10 +49,10 @@ for database in $DATAFILES; do
         q_short_name=$(basename "$query")
         q_short_name="${q_short_name%.*}"
 
-	mkdir -p /home/cklinger/"blastp_$db_short_name"
+	mkdir -p /home/cklinger/"blastp_$q_short_name"
 
         ##send BLAST command to Cluster nodes
-        blastp -query "$query" -db "$database" -out "blastp_$db_short_name/${q_short_name}_${db_short_name}_${now}.outfile.txt" -outfmt "6 qseqid sseqid evalue"  $BLAST_OPTIONS
+        blastp -query "$query" -db "$database" -out "blastp_$q_short_name/${q_short_name}_${db_short_name}_${now}.outfile.txt" $BLAST_OPTIONS
     done
 done
 
