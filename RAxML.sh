@@ -31,7 +31,7 @@ echo
 
 for query in $QUERYFILES; do
     ##send RAxML command to Cluster nodes
-    raxmlHPC-HYBRID-SSE3 -n result -s "$query" -m PROTCATLG -N 100 -c 25 -p 12345 -b 12345
+    raxmlHPC-HYBRID-SSE3 -n result -s "$query" -m PROTCATLG -N 100 -c 25 -p 12345 -b 12345 -T 10
 done
 
 ##End Script
